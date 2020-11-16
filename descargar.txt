@@ -1,0 +1,44 @@
+import numpy as np
+import networkx as nx
+ 
+#BELTRAN PACHECO CERON TORRES JAIME RAMIREZ MARIN UZZIL
+caries = [0.02, 0.98]
+dolor = [[0.06,0.4],[0.10,0.4]]
+hueco = [[0.90,0.04],[0.10,0.4]]
+
+
+varialblesAlea = [caries, dolor, hueco]
+print("Caries = " , str(caries))
+print("dolor = ", str(dolor))
+print("hueco = ", str(hueco))
+
+
+distribucion = np.zeros([2,2,2])
+
+for icaries  in range(2):
+  for idolor in range(2):
+    for ihueco in range(2):
+      distribucion[icaries, idolor, ihueco] = dolor[icaries][idolor] * hueco[icaries][ihueco] * caries[icaries] 
+ 
+print("Distrubución conjunta completa")
+print(distribucion)
+
+g = nx.Graph()
+g.add_node("caries")
+g.add_node("dolor")
+g.add_node("hueco")
+g.add_edge("caries","dolor")
+g.add_edge("caries","hueco")
+pos = {'caries': np.array([0, 0]), 'dolor': np.array([-1,  -1]), 'hueco': np.array([1, -1])}
+nx.draw(g, with_labels=True,pos=pos, font_weight='bold')
+
+
+
+
+
+
+
+-----------
+pos = nx.circular_layout(g)
+print(type(pos))
+print(pos
